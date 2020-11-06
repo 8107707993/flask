@@ -1,10 +1,25 @@
+import json
+
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import mysql.connector as conn
+from flask_mail import Mail
+import conn
+
+with open('config.json', 'r') as c:
+    params = json.load(c)["params"]
 
 app = Flask(__name__)
 
+# app.config.update(
+#     MAIL_SERVER='smtp.gmail.com',
+#     MAIL_PORT='465',
+#     MAIL_USE_SSL=True,
+#     MAIL_USERNAME=params['user-mail'],
+#     MAIL_PASSWORD=params['user-password']
+# )
+#
+# mail = Mail(app)
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/bloger'
 # db = SQLAlchemy(app)
@@ -19,12 +34,7 @@ app = Flask(__name__)
 #     email = db.Column(db.String(20), nullable=False)
 
 
-def conn_db():
-    return conn.connect(host='localhost',
-                        user='root',
-                        password='',
-                        database='bloger'
-                        )
+conn.conn_db()
 
 
 @app.route('/')
@@ -34,11 +44,11 @@ def home():
 
 @app.route("/contact", methods=['GET', 'POST'])
 def contact():
-    if (request.method == 'post'):
+    if request.method == 'POST':
         '''add entry to the database'''
 
         def add_data():
-            cnx = conn_db()
+            cnx = conn.conn_db()
             cursor = cnx.cursor()
             name = request.form.get('name')
             email = request.form.get('email')
@@ -51,6 +61,11 @@ def contact():
             cursor.execute("INSERT INTO contacts(name,phone_num, msg , email,date) VALUES (%s,%s, %s, %s, %s)",
                            (name, phone, message, email, date))
             cnx.commit()
+            # mail.send_message('New message from ' + name,
+            #                   sender=email,
+            #                   recipients=[params['user-mail']],
+            #                   body=message + "\n" + phone
+            #                   )
 
         add_data()
 
