@@ -114,12 +114,12 @@ def contact():
             email = request.form.get('email')
             phone = request.form.get('phone')
             message = request.form.get('message')
-            date=datetime.now()
+            date = datetime.now()
             # if not request.json:
             #     ab(400)
 
             cursor.execute("INSERT INTO contacts(name,phone_num, msg , email,date) VALUES (%s,%s, %s, %s, %s)",
-                           (name, phone, message, email,date))
+                           (name, phone, message, email, date))
             cnx.commit()
 
         add_data()
@@ -138,3 +138,48 @@ def about():
 
 
 app.run(debug=True)
+exit()
+# import mysql.connector
+# from mysql.connector import Error
+# from flask_sqlalchemy import SQLAlchemy
+
+
+# app.config.update(
+#     MAIL_SERVER='smtp.gmail.com',
+#     MAIL_PORT='465',
+#     MAIL_USE_SSL=True,
+#     MAIL_USERNAME=params['user-mail'],
+#     MAIL_PASSWORD=params['user-password']
+# )
+#
+# mail = Mail(app)
+# db = conn.conn_db()
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/bloger'
+
+# db = SQLAlchemy(app)
+#
+# class Contacts(db.Model):
+#     sno = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(80), nullable=False)
+#     phone_num = db.Column(db.String(12), nullable=False)
+#     msg = db.Column(db.String(120), nullable=False)
+#     date = db.Column(db.String(12), nullable=True)
+#     email = db.Column(db.String(20), nullable=False)
+
+#
+# class Posts(db.Model):
+#     sno = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(80), nullable=False)
+#     tagline = db.Column(db.String(50), nullable=False)
+#     img_file = db.Column(db.String(12), nullable=False)
+#     slug = db.Column(db.String(25), nullable=False)
+#     content = db.Column(db.String(500), nullable=False)
+#     date = db.Column(db.String(12), nullable=True)
+# if not request.json:
+#     ab(400)
+
+# mail.send_message('New message from ' + name,
+#                   sender=email,
+#                   recipients=[params['user-mail']],
+#                   body=message + "\n" + phone
+#                   )

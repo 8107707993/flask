@@ -1,6 +1,17 @@
 {
   "params": {
     "user-mail": "subhash810770@gmail.com",
-    "user-password": "g8107707993l"
+    "user-password": "g8107707993l",
+    "no_of_posts": 5,
+    "tag_line": "Heaven for programmers",
+    "gmail-user": "your-email@gmail.com",
+    "gmail-password": "gmailpassword",
+    "about_text": "Hi my name is harry and I create programming tutorials and I am a good boy",
+    "post_title": "select_query.py",
+    "post_tagline": "SELECT tagline FROM posts",
+    "post_img_file": "SELECT img_file FROM posts",
+    "post_slug": "SELECT slug FROM posts",
+    "post_content": "SELECT content FROM posts",
+    "post_date": "SELECT date FROM posts"
   }
 }
